@@ -71,6 +71,9 @@ export function Header() {
               <DropdownMenuItem onClick={() => setLanguage('te')}>
                 తెలుగు
               </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('kn')}>
+                ಕನ್ನಡ
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

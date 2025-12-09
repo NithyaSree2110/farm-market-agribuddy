@@ -14,7 +14,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem('farm2market-language') as Language;
-    if (saved && (saved === 'en' || saved === 'hi' || saved === 'te')) {
+    if (saved && (saved === 'en' || saved === 'hi' || saved === 'te' || saved === 'kn')) {
       setLanguageState(saved);
     }
   }, []);

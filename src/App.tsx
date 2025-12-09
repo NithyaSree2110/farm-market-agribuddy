@@ -7,8 +7,12 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
+import PhoneAuth from "./pages/PhoneAuth";
 import Marketplace from "./pages/Marketplace";
 import MyCrops from "./pages/MyCrops";
+import CropDetail from "./pages/CropDetail";
+import Chat from "./pages/Chat";
+import Orders from "./pages/Orders";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,8 +28,12 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/phone-auth" element={<PhoneAuth />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/my-crops" element={<MyCrops />} />
+              <Route path="/crop/:id" element={<CropDetail />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/orders" element={<Orders />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
