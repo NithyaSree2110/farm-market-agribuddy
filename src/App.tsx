@@ -13,6 +13,8 @@ import MyCrops from "./pages/MyCrops";
 import CropDetail from "./pages/CropDetail";
 import Chat from "./pages/Chat";
 import Orders from "./pages/Orders";
+import FarmerDashboard from "./pages/FarmerDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,9 +33,12 @@ const App = () => (
               <Route path="/phone-auth" element={<PhoneAuth />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/my-crops" element={<MyCrops />} />
+              <Route path="/add-crop" element={<MyCrops />} />
               <Route path="/crop/:id" element={<CropDetail />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
+              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

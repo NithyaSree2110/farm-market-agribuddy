@@ -88,7 +88,7 @@ export default function Chat() {
       const { data, error } = await supabase
         .from('chats')
         .select('*')
-        .or(`buyer_id.eq.${user?.id},farmer_id.eq.${user?.id}`)
+        .or(`buyer_id.eq.${user?.uid},farmer_id.eq.${user?.uid}`)
         .order('updated_at', { ascending: false });
 
       if (error) throw error;
@@ -108,7 +108,7 @@ export default function Chat() {
       const { data: existingChat } = await supabase
         .from('chats')
         .select('*')
-        .eq('buyer_id', user.id)
+        .eq('buyer_id', user.uid)
         .eq('farmer_id', farmerId)
         .eq('crop_id', cropId)
         .single();
@@ -122,7 +122,7 @@ export default function Chat() {
       const { data: newChat, error } = await supabase
         .from('chats')
         .insert({
-          buyer_id: user.id,
+          buyer_id: user.uid,
           farmer_id: farmerId,
           crop_id: cropId
         })
@@ -165,7 +165,7 @@ export default function Chat() {
     try {
       const { error } = await supabase.from('messages').insert({
         chat_id: activeChat,
-        sender_id: user.id,
+        sender_id: user.uid,
         content: newMessage.trim(),
       });
 
@@ -235,7 +235,7 @@ export default function Chat() {
                         </div>
                         <div>
                           <p className="font-medium">
-                            {chat.farmer_id === user.id ? t('buyer') : t('farmer')}
+                            {chat.farmer_id === user.uid ? t('buyer') : t('farmer')}
                           </p>
                           <p className="text-sm text-muted-foreground">
                             {new Date(chat.updated_at).toLocaleDateString()}
@@ -269,12 +269,12 @@ export default function Chat() {
                         <div
                           key={message.id}
                           className={`flex ${
-                            message.sender_id === user.id ? 'justify-end' : 'justify-start'
+                            message.sender_id === user.uid ? 'justify-end' : 'justify-start'
                           }`}
                         >
                           <div
                             className={`max-w-[70%] rounded-lg px-4 py-2 ${
-                              message.sender_id === user.id
+                              message.sender_id === user.uid
                                 ? 'bg-primary text-primary-foreground'
                                 : 'bg-muted'
                             }`}
