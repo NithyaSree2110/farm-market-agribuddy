@@ -36,7 +36,7 @@ export default function MyCrops() {
     const { data } = await supabase
       .from('crops')
       .select('*')
-      .eq('farmer_id', user?.id)
+      .eq('farmer_id', user?.uid)
       .order('created_at', { ascending: false });
     setCrops(data || []);
   };
@@ -48,7 +48,7 @@ export default function MyCrops() {
     setUploading(true);
     try {
       const fileExt = file.name.split('.').pop();
-      const filePath = `${user.id}/${Date.now()}.${fileExt}`;
+      const filePath = `${user.uid}/${Date.now()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from('crop-images')
@@ -93,7 +93,7 @@ export default function MyCrops() {
       quantity_kg: parseFloat(formData.get('quantity_kg') as string),
       location: formData.get('location') as string,
       image_url: imageUrl,
-      farmer_id: user?.id,
+      farmer_id: user?.uid,
     };
 
     try {

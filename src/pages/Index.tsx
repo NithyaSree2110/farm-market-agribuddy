@@ -6,15 +6,25 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Leaf, MessageSquare, Shield } from 'lucide-react';
 
 export default function Index() {
-  const { user, loading } = useAuth();
+  const { user, loading, userRole, needsRoleSelection } = useAuth();
   const navigate = useNavigate();
   const { t } = useLanguage();
 
   useEffect(() => {
-    if (user && !loading) {
-      navigate('/marketplace');
+    if (!loading && user && userRole && !needsRoleSelection) {
+      // Redirect based on role
+      switch (userRole) {
+        case 'admin':
+          navigate('/admin');
+          break;
+        case 'farmer':
+          navigate('/farmer-dashboard');
+          break;
+        default:
+          navigate('/marketplace');
+      }
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, userRole, needsRoleSelection, navigate]);
 
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">{t('loading')}</div>;
@@ -36,7 +46,7 @@ export default function Index() {
             onClick={() => navigate('/auth')}
             className="bg-gradient-primary text-lg px-8 py-6 gap-2"
           >
-            {t('login')} / {t('signup')}
+            {t('login')}
             <ArrowRight className="h-5 w-5" />
           </Button>
         </div>
